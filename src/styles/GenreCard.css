@@ -1,0 +1,40 @@
+.genre-card {
+  width: 12rem;
+  height: 15rem;
+  flex: 1;
+  cursor: pointer;
+  transition: all 0.4s ease-out;
+}
+
+.genre-card-parent .genre-card {
+  border-radius: 10%;
+}
+
+.genre-card:hover {
+  box-shadow: 0 0 4em 0px rgba(0, 0, 0, 0.4);
+  transform: scale(1.05);
+}
+.genre-card:active {
+  transform: scale(1.05) translateY(0.3rem);
+}
+
+.genre-card-image {
+  width: 12rem;
+  height: 15rem;
+  filter: blur(4px);
+}
+
+.genre-card-image-parent .genre-card-image {
+  border-radius: 10%;
+}
+
+.genre-card-title {
+  text-align: center;
+}
+
+.movie-cards {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+}

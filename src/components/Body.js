@@ -1,32 +1,12 @@
 import React from "react";
 import GenreCard from "./GenreCard";
+import { genres } from "../data/genres";
+import "../styles/Body.css";
 
 const Body = () => {
-  const styles = {
-    display: "flex",
-    flexDirection: "row",
-    flexWrap: "wrap",
-    justifyContent: "center",
-  };
   return (
-    <div style={styles}>
-      {[
-        "Action",
-        "Adventure",
-        "Animation",
-        "Biography",
-        "Comedy",
-        "Crime",
-        "Drama",
-        "Fantasy",
-        "History",
-        "Horror",
-        "Musical",
-        "Romance",
-        "Sci-Fi",
-        "Thriller",
-        "Western",
-      ].map((source, idx) => (
+    <div className="main-body-component">
+      {genres?.map((source, idx) => (
         <GenreCard key={idx} source={source} id={idx} />
       ))}
     </div>

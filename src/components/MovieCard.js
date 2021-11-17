@@ -1,61 +1,40 @@
 import React from "react";
-import { useSelector } from "react-redux";
-import { useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import { Card } from "react-bootstrap";
+import { setSelectedMovie } from "../redux/movies/moviesActions";
 import MovieDetails from "./MovieDetails";
+import "../styles/MovieCard.css";
 
 const MovieCard = (props) => {
-  const [displayDetails, setDisplayDetails] = useState(false);
   const movie = useSelector((state) =>
-    state?.movies.movies?.find((entity) => entity.id === props?.id)
+    state?.movies.movies?.find((entity) => entity?.id === props?.id)
   );
+  const selectedMovie = useSelector((state) => state?.movies?.selectedMovie);
+  const dispatch = useDispatch();
   const handleClick = () => {
-    setDisplayDetails(true);
-  };
-  const cardStyles = {
-    width: "15rem",
-    height: "20rem",
-    borderRadius: "10%",
-    flex: 1,
-    cursor: "pointer",
+    dispatch(setSelectedMovie(movie?.id));
   };
 
-  const cardImgStyles = {
-    width: "15rem",
-    height: "20rem",
-    borderRadius: "10%",
-  };
-
-  const cardTitleStyles = { textAlign: "center" };
   return (
     <div>
-      <Card
-        style={cardStyles}
-        className="m-3 bg-dark text-white movieCard"
-        onClick={handleClick}
-      >
+      <Card className="m-3 bg-dark text-white movie-card" onClick={handleClick}>
         <Card.Img
-          style={cardImgStyles}
-          src={movie.posterurl}
+          className="movie-card-image"
+          src={movie?.posterurl}
           alt="Card image"
         />
-        <Card.ImgOverlay
-          style={{ borderRadius: "10%", width: "15rem", height: "20rem" }} //I have to add the styles for overlay here cuz otherwise they are not working working.
-          className="movieCardOverlay"
-        >
-          <Card.Body className="movieCardText">
-            <Card.Title className="mt-5" style={cardTitleStyles}>
-              {movie.title.toUpperCase()}
+        <Card.ImgOverlay className="movie-card-overlay">
+          <Card.Body className="movie-card-text">
+            <Card.Title className="mt-5">
+              {movie?.title?.toUpperCase()}
             </Card.Title>
           </Card.Body>
         </Card.ImgOverlay>
       </Card>
-      {displayDetails && (
-        <MovieDetails
-          key={props?.id}
-          setDisplayDetails={setDisplayDetails}
-          id={props?.id}
-        />
+      {selectedMovie === movie?.id ? (
+        <MovieDetails key={props?.id} id={props?.id} />
+      ) : (
+        <></>
       )}
     </div>
   );
